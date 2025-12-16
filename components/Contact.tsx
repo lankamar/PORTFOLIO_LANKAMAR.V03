@@ -9,7 +9,7 @@ const Contact: React.FC = () => {
     mensaje: '',
     website: '' // Honeypot
   });
-  
+
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
@@ -32,7 +32,7 @@ const Contact: React.FC = () => {
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
     const fields = ['nombre', 'email', 'mensaje'];
-    
+
     fields.forEach(field => {
       const error = validateField(field, formData[field as keyof typeof formData]);
       if (error) newErrors[field] = error;
@@ -58,7 +58,7 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // HONEYPOT CHECK
     if (formData.website && formData.website.length > 0) {
       // Silently fail for bots
@@ -72,7 +72,7 @@ const Contact: React.FC = () => {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
+
       console.log('Form Submitted:', {
         ...formData,
         timestamp: new Date().toISOString()
@@ -80,7 +80,7 @@ const Contact: React.FC = () => {
 
       setStatus('success');
       setFormData({ nombre: '', email: '', mensaje: '', website: '' });
-      
+
       // Reset success message after 5 seconds
       setTimeout(() => setStatus('idle'), 5000);
 
@@ -95,17 +95,21 @@ const Contact: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
     // Clear error on type
     if (errors[name]) {
-        setErrors(prev => {
-            const next = { ...prev };
-            delete next[name];
-            return next;
-        });
+      setErrors(prev => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
     }
   };
 
   return (
-    <section id="contact" className="py-24 px-4 relative z-10">
-      <div className="max-w-2xl mx-auto">
+    <section id="contact" className="py-24 px-4 relative overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <img src="/dioramas/open-questions.png" alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/25"></div>
+      </div>
+      <div className="max-w-2xl mx-auto relative z-10">
         <h2 className="font-serif text-4xl md:text-5xl text-text-primary mb-6 text-center">
           {copy.contact.title}
         </h2>
@@ -113,12 +117,12 @@ const Contact: React.FC = () => {
           {copy.contact.description}
         </p>
 
-        <motion.form 
-            onSubmit={handleSubmit} 
-            className="glass-card"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+        <motion.form
+          onSubmit={handleSubmit}
+          className="glass-card"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
         >
           {/* HONEYPOT FIELD */}
           <input
@@ -195,13 +199,13 @@ const Contact: React.FC = () => {
           </div>
 
           {status === 'success' && (
-             <motion.div 
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                className="mt-4 p-4 bg-green-900/20 border border-green-800 rounded text-green-100 text-center font-mono"
-             >
-                Mensaje enviado. Conexión establecida.
-             </motion.div>
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              className="mt-4 p-4 bg-green-900/20 border border-green-800 rounded text-green-100 text-center font-mono"
+            >
+              Mensaje enviado. Conexión establecida.
+            </motion.div>
           )}
         </motion.form>
       </div>

@@ -1,17 +1,17 @@
 
+
 export const copy = {
   "brand": {
-    "name": "MARCELO OMAR LANCRY KAMYCKI",
-    "alias": "LANKAMAR",
-    "identity": "DISEÑADOR DE TECNOLOGÍAS EDUCATIVAS EN SALUD",
-    "archetype": "Implementador de Soluciones con IA"
+    "name": "LANKAMAR LABS",
+    "tagline": "Epistemología Clínica y Diseño Computacional",
+    "subtitle": "Investigando la brecha de abstracción en la formación clínica"
   },
   "hero": {
-    "console": "> System.load_agentic_workflow(\"Health_EdTech\");",
-    "title": "MARCELO LANCRY KAMYCKI",
-    "subtitle": "CODISEÑO AGÉNTICO // AUTORIDAD CLÍNICA",
-    "lead": "35 años de experiencia clínica evolucionados hacia el desarrollo de software asistido por IA. Transformo necesidades pedagógicas complejas en soluciones digitales escalables sin depender de grandes infraestructuras.",
-    "cta": "INICIAR CONEXIÓN SEGURA"
+    "console": "> Cargando marco de investigación...",
+    "title": "LANKAMAR LABS",
+    "subtitle": "EPISTEMOLOGÍA CLÍNICA Y DISEÑO COMPUTACIONAL",
+    "lead": "Investigamos la brecha de abstracción en la educación clínica mediante Entornos de Pre-Simulación Cognitiva (CPSE). Construyendo puentes entre el conocimiento teórico y la práctica física a través de andamiaje digital de bajo costo.",
+    "cta": "VER MARCO TEÓRICO"
   },
   "about": {
     "title": "Perfil Híbrido: Salud, Educación & Código",
@@ -75,11 +75,11 @@ export const copy = {
     "spirit": "CALMO",
     "tech": "React + Tailwind + Framer Motion",
     "links": {
-        "linkedin": "https://www.linkedin.com/in/marcelo-lancry",
-        "github": "https://github.com/lankamar",
-        "poe": "https://poe.com/lankamar",
-        "youtube": "https://www.youtube.com/@lankamar",
-        "email": "lankamar@gmail.com"
+      "linkedin": "https://www.linkedin.com/in/marcelo-lancry",
+      "github": "https://github.com/lankamar",
+      "poe": "https://poe.com/lankamar",
+      "youtube": "https://www.youtube.com/@lankamar",
+      "email": "lankamar@gmail.com"
     }
   }
 };

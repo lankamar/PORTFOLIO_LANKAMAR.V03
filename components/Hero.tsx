@@ -24,9 +24,20 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="min-h-screen w-full flex items-center justify-center relative pt-16">
+    <section className="min-h-screen w-full flex items-start justify-center relative pt-24 overflow-hidden">
+      {/* Diorama Background */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/dioramas/home-hero.png"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+        {/* Minimal overlay - let characters show through */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/25"></div>
+      </div>
+
       <motion.div
-        className="max-w-4xl mx-auto px-4 text-center z-10"
+        className="max-w-4xl mx-auto px-4 text-center z-10 relative"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -39,9 +50,9 @@ const Hero: React.FC = () => {
           {copy.hero.console}
         </motion.p>
 
-        {/* Title */}
+        {/* Title - positioned where left character points */}
         <motion.h1
-          className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary mb-6 drop-shadow-text"
+          className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]"
           variants={itemVariants}
         >
           {copy.hero.title}
@@ -49,15 +60,15 @@ const Hero: React.FC = () => {
 
         {/* Subtitle */}
         <motion.p
-          className="font-mono uppercase tracking-widest text-accent-hover mb-8 text-lg font-bold drop-shadow-md"
+          className="font-mono uppercase tracking-widest text-accent-hover/90 mb-6 text-base font-bold drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
           variants={itemVariants}
         >
           {copy.hero.subtitle}
         </motion.p>
 
-        {/* Lead */}
+        {/* Lead - shortened to not cover characters */}
         <motion.p
-          className="max-w-2xl mx-auto text-text-primary text-lg md:text-xl leading-relaxed mb-12 font-light drop-shadow-md"
+          className="max-w-3xl mx-auto text-white text-base md:text-lg leading-relaxed mb-8 font-light drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
           variants={itemVariants}
         >
           {copy.hero.lead}

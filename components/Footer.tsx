@@ -4,8 +4,12 @@ import { copy } from '../lib/copy';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="py-12 px-4 border-t border-accent-base/20 relative z-10 bg-black/40 backdrop-blur-sm">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-8">
+    <footer className="py-12 px-4 border-t border-accent-base/20 relative overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <img src="/dioramas/footer.png" alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40"></div>
+      </div>
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-8 relative z-10">
         {/* Legal & Tagline */}
         <div className="flex flex-col items-center md:items-start">
           <p className="font-mono text-text-primary text-sm tracking-wider">
@@ -49,11 +53,11 @@ const Footer: React.FC = () => {
           >
             {/* Chat Bubble Icon for Poe */}
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
               <path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" />
             </svg>
           </a>
-           <a
+          <a
             href={copy.footer.links.youtube}
             target="_blank"
             rel="noopener noreferrer"
@@ -61,11 +65,11 @@ const Footer: React.FC = () => {
             className="text-text-secondary hover:text-accent-hover transition-colors duration-300 transform hover:scale-110"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-               <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+              <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
             </svg>
           </a>
         </div>
-        
+
         {/* Status & Tech */}
         <div className="flex flex-col items-center md:items-end">
           <div className="flex items-center gap-4 text-xs font-mono text-accent-base">

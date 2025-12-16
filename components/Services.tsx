@@ -23,12 +23,16 @@ const Services: React.FC = () => {
   };
 
   return (
-    <section className="py-24 px-4 relative z-10">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-24 px-4 relative overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <img src="/dioramas/implementations.png" alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/25"></div>
+      </div>
+      <div className="max-w-6xl mx-auto relative z-10">
         <h2 className="font-serif text-4xl md:text-5xl text-text-primary mb-16 text-center">
           Servicios
         </h2>
-        
+
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
           variants={containerVariants}

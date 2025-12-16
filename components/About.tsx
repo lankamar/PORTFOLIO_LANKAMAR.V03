@@ -25,8 +25,12 @@ const About: React.FC = () => {
   const renderHTML = (html: string) => ({ __html: html });
 
   return (
-    <section id="about" className="py-24 px-4 relative z-10">
-      <div className="max-w-4xl mx-auto">
+    <section id="about" className="py-24 px-4 relative overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <img src="/dioramas/framework.png" alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/25"></div>
+      </div>
+      <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -35,7 +39,7 @@ const About: React.FC = () => {
           className="space-y-16"
         >
           {/* Main Title */}
-          <motion.h2 
+          <motion.h2
             variants={itemVariants}
             className="font-serif text-4xl md:text-5xl text-text-primary text-center leading-tight"
           >
@@ -45,7 +49,7 @@ const About: React.FC = () => {
           {/* Intro Paragraphs */}
           <motion.div variants={itemVariants} className="glass-card space-y-6">
             {copy.about.intro.map((paragraph, idx) => (
-              <p 
+              <p
                 key={idx}
                 className="text-text-primary text-lg leading-relaxed font-light"
                 dangerouslySetInnerHTML={renderHTML(paragraph)}
@@ -59,9 +63,9 @@ const About: React.FC = () => {
               {copy.about.manifesto.title}
             </h3>
             <div className="text-text-secondary text-lg leading-relaxed whitespace-pre-line">
-                <p dangerouslySetInnerHTML={renderHTML(copy.about.manifesto.text.split('\n\n')[0])} />
-                <br />
-                <p dangerouslySetInnerHTML={renderHTML(copy.about.manifesto.text.split('\n\n')[1])} />
+              <p dangerouslySetInnerHTML={renderHTML(copy.about.manifesto.text.split('\n\n')[0])} />
+              <br />
+              <p dangerouslySetInnerHTML={renderHTML(copy.about.manifesto.text.split('\n\n')[1])} />
             </div>
             <ul className="space-y-4 ml-4">
               {copy.about.manifesto.items.map((item, idx) => (
@@ -79,7 +83,7 @@ const About: React.FC = () => {
               {copy.about.rag.title}
             </h3>
             <div className="text-text-secondary text-lg leading-relaxed whitespace-pre-line">
-                 <p dangerouslySetInnerHTML={renderHTML(copy.about.rag.text)} />
+              <p dangerouslySetInnerHTML={renderHTML(copy.about.rag.text)} />
             </div>
             <ul className="space-y-4 ml-4">
               {copy.about.rag.items.map((item, idx) => (
@@ -96,7 +100,7 @@ const About: React.FC = () => {
             <h3 className="font-serif text-2xl text-text-primary mb-4">
               {copy.about.purpose.title}
             </h3>
-            <p 
+            <p
               className="text-text-secondary text-lg leading-relaxed mb-8"
               dangerouslySetInnerHTML={renderHTML(copy.about.purpose.text)}
             />
