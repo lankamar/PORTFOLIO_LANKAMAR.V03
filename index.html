@@ -1,175 +1,206 @@
 <!DOCTYPE html>
-<html lang="es-AR" class="scroll-smooth">
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marcelo Lancry | El Intelectual Peligroso</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LANKAMAR LABS | Epistemología Clínica y Diseño Computacional</title>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'bg-top': 'var(--color-bg-top)',
+              'bg-mid': 'var(--color-bg-mid)',
+              'bg-bottom': 'var(--color-bg-bottom)',
+              'text-primary': 'var(--color-text-primary)',
+              'text-secondary': 'var(--color-text-secondary)',
+              'accent-base': 'var(--color-accent-base)',
+              'accent-hover': 'var(--color-accent-hover)',
+              'accent-active': 'var(--color-accent-active)',
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', 'Georgia', 'serif'],
+              mono: ['"JetBrains Mono"', 'Courier New', 'monospace'],
+            },
+            boxShadow: {
+              'xl': '0 25px 50px -12px rgba(139, 29, 29, 0.25)',
+              'glow': '0 0 15px rgba(139, 29, 29, 0.6)',
+            },
+            dropShadow: {
+               'text': '0 4px 3px rgba(0, 0, 0, 0.8)',
+            }
+          }
+        }
+      }
+    </script>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Playfair+Display:wght@400;600;700&display=swap"
-    rel="stylesheet">
+    <!-- Visual System CSS Variables & Global Styles -->
+    <style>
+      :root {
+        /* Colors */
+        --color-bg-top: #2a0404; /* Darker Burgundy for depth */
+        --color-bg-mid: #1a0202;
+        --color-bg-bottom: #000000;
+        --color-text-primary: #f5f5f4;
+        --color-text-secondary: #a8a29e;
+        --color-accent-base: #8b1d1d;
+        --color-accent-hover: #b91c1c;
+        --color-accent-active: #dc2626;
+        
+        /* Opacities & Values */
+        --opacity-overlay: 0.03;
+        --opacity-neural-node: 0.9;
+        --opacity-neural-line: 0.12;
+        --border-radius: 0.5rem;
+        --glass-blur: 12px;
+        --glass-opacity: 0.3;
+        --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        /* Shadows */
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 25px 50px -12px rgba(139, 29, 29, 0.25);
 
+        /* Typography - Fluid Type Scales */
+        --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+        --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+        --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+        --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);
+        --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+        --text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
+        --text-3xl: clamp(1.875rem, 1.6rem + 1.25vw, 2.5rem);
+        --text-4xl: clamp(2.25rem, 1.75rem + 2vw, 3.5rem);
+        --text-5xl: clamp(3rem, 2.25rem + 3.75vw, 5rem);
+        --text-6xl: clamp(3.75rem, 2.75rem + 5vw, 6rem);
+      }
 
-  <!-- Visual System CSS Variables & Global Styles -->
-  <style>
-    :root {
-      /* Colors */
-      --color-bg-top: #2a0404;
-      /* Darker Burgundy for depth */
-      --color-bg-mid: #1a0202;
-      --color-bg-bottom: #000000;
-      --color-text-primary: #f5f5f4;
-      --color-text-secondary: #a8a29e;
-      --color-accent-base: #8b1d1d;
-      --color-accent-hover: #b91c1c;
-      --color-accent-active: #dc2626;
+      html {
+        scroll-behavior: smooth;
+      }
 
-      /* Opacities & Values */
-      --opacity-overlay: 0.03;
-      --opacity-neural-node: 0.9;
-      --opacity-neural-line: 0.12;
-      --border-radius: 0.5rem;
-      --glass-blur: 12px;
-      --glass-opacity: 0.3;
-      --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      body {
+        margin: 0;
+        background-color: var(--color-bg-bottom);
+        color: var(--color-text-primary);
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 300;
+        overflow-x: hidden;
+      }
 
-      /* Shadows */
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      --shadow-xl: 0 25px 50px -12px rgba(139, 29, 29, 0.25);
+      /* Global Heading Styles */
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        text-shadow: 
+          2px 2px 0px #000000,
+          0 0 20px rgba(220, 38, 38, 0.5); /* Neon Shadow with Contrast */
+      }
 
-      /* Typography - Fluid Type Scales */
-      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
-      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-      --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);
-      --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
-      --text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
-      --text-3xl: clamp(1.875rem, 1.6rem + 1.25vw, 2.5rem);
-      --text-4xl: clamp(2.25rem, 1.75rem + 2vw, 3.5rem);
-      --text-5xl: clamp(3rem, 2.25rem + 3.75vw, 5rem);
-      --text-6xl: clamp(3.75rem, 2.75rem + 5vw, 6rem);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background-color: var(--color-bg-bottom);
-      color: var(--color-text-primary);
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 300;
-      overflow-x: hidden;
-    }
-
-    /* Global Heading Styles */
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-      /* Added Shadow for Depth */
-    }
-
-    /* Glassmorphism Classes */
-    .glass-card {
-      background: rgba(40, 5, 5, var(--glass-opacity));
-      /* Slightly darker base */
-      backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-      border: 1px solid rgba(139, 29, 29, 0.2);
-      border-radius: var(--border-radius);
-      padding: 2rem;
-      min-height: 320px;
-      will-change: transform;
-      transform: translateZ(0);
-      contain: layout style paint;
-      transition: all var(--transition-base);
-      box-shadow: var(--shadow-md);
-    }
-
-    .glass-card:hover {
-      border-color: rgba(139, 29, 29, 0.6);
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: var(--shadow-xl);
-      background: rgba(60, 10, 10, 0.4);
-    }
-
-    .glass-card:focus-within {
-      outline: 2px solid var(--color-accent-hover);
-      outline-offset: 4px;
-    }
-
-    /* Reduced Motion */
-    @media (prefers-reduced-motion: reduce) {
+      /* Glassmorphism Classes */
       .glass-card {
-        transition: none;
-        transform: none;
-        will-change: auto;
+        background: rgba(40, 5, 5, var(--glass-opacity)); /* Slightly darker base */
+        backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+        border: 1px solid rgba(139, 29, 29, 0.2);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        min-height: 320px;
+        will-change: transform;
+        transform: translateZ(0);
+        contain: layout style paint;
+        transition: all var(--transition-base);
+        box-shadow: var(--shadow-md);
       }
 
       .glass-card:hover {
-        transform: none;
+        border-color: rgba(139, 29, 29, 0.6);
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: var(--shadow-xl);
+        background: rgba(60, 10, 10, 0.4);
       }
-    }
 
-    /* Mobile Adjustment */
-    @media (max-width: 768px) {
-      .glass-card {
-        padding: 1.5rem;
-        min-height: auto;
+      .glass-card:focus-within {
+        outline: 2px solid var(--color-accent-hover);
+        outline-offset: 4px;
       }
-    }
 
-    /* Hero Background Gradient + Noise Logic */
-    .hero-bg {
-      background: radial-gradient(circle at 50% 50%, #2b0505 0%, #000000 100%);
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      filter: url(#noise);
-      opacity: 0.8;
-    }
+      /* Reduced Motion */
+      @media (prefers-reduced-motion: reduce) {
+        .glass-card {
+          transition: none;
+          transform: none;
+          will-change: auto;
+        }
+        .glass-card:hover {
+          transform: none;
+        }
+      }
 
-    /* Subtle overlay gradient for more color depth */
-    .hero-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background: linear-gradient(225deg,
+      /* Mobile Adjustment */
+      @media (max-width: 768px) {
+        .glass-card {
+          padding: 1.5rem;
+          min-height: auto;
+        }
+      }
+
+      /* Hero Background Gradient + Noise Logic */
+      .hero-bg {
+        /* Degradé lineal de Violeta Oscuro a Rojo Oscuro (Izquierda a Derecha) */
+        background: linear-gradient(to right, #190524, #2b0505);
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        filter: url(#noise);
+        opacity: 0.8;
+      }
+      
+      /* Subtle overlay gradient for more color depth */
+      .hero-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background: linear-gradient(
+          225deg,
           rgba(69, 10, 10, 0.4) 0%,
-          transparent 60%);
-      pointer-events: none;
-    }
-  </style>
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24"
+  }
+}
+</script>
 </head>
-
-<body>
-  <!-- SVG Noise Filter Definition -->
-  <svg style="display: none;">
-    <defs>
-      <filter id="noise">
-        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" result="noise" seed="5" />
-        <feColorMatrix in="noise" type="saturate" values="0.2" />
-        <feBlend in="SourceGraphic" in2="noise" mode="overlay" />
-      </filter>
-    </defs>
-  </svg>
-  <div id="root"></div>
-  <div class="hero-overlay"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
-
+  <body>
+    <!-- SVG Noise Filter Definition -->
+    <svg style="display: none;">
+      <defs>
+        <filter id="noise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" result="noise" seed="5" />
+          <feColorMatrix in="noise" type="saturate" values="0.2" />
+          <feBlend in="SourceGraphic" in2="noise" mode="overlay" />
+        </filter>
+      </defs>
+    </svg>
+    <div id="root"></div>
+    <div class="hero-overlay"></div>
+  </body>
 </html>

@@ -7,8 +7,11 @@ interface Node {
   baseX: number; // Origin X for organic movement
   baseY: number; // Origin Y for organic movement
   phase: number; // For sine wave animation
+  phaseY: number; // Independent phase for Y
   speed: number;
   size: number;
+  amplitudeX: number; // Independent amplitude for X
+  amplitudeY: number; // Independent amplitude for Y
 }
 
 const NeuralBackground: React.FC = () => {
@@ -44,10 +47,11 @@ const NeuralBackground: React.FC = () => {
 
     // UPDATE & DRAW NODES
     nodes.current.forEach(node => {
-      // 1. Organic Floating (Sine/Cos based on time + phase)
-      // This creates the "Cloud" feel rather than "Bouncing Ball"
-      const floatX = Math.sin(timeRef.current * node.speed + node.phase) * 30;
-      const floatY = Math.cos(timeRef.current * node.speed + node.phase) * 30;
+      // 1. Organic Floating
+      // Use distinct phases/amplitudes for X and Y to create non-circular, organic paths
+      const floatX = Math.sin(timeRef.current * node.speed + node.phase) * node.amplitudeX;
+      // Using a slightly different frequency multiplier (0.9) for Y prevents perfect loops
+      const floatY = Math.cos(timeRef.current * node.speed * 0.9 + node.phaseY) * node.amplitudeY;
 
       // 2. Mouse Interaction (Subtle attraction)
       let dx = mouseRef.current.x - (node.baseX + floatX);
@@ -82,7 +86,9 @@ const NeuralBackground: React.FC = () => {
     });
 
     // DRAW CONNECTIONS (Synapses)
-    ctx.lineWidth = 1;
+    const maxDistance = 220; // Slightly increased range
+    const mouseInfluenceRadius = 250;
+
     for (let i = 0; i < nodes.current.length; i++) {
       for (let j = i + 1; j < nodes.current.length; j++) {
         const n1 = nodes.current[i];
@@ -92,18 +98,45 @@ const NeuralBackground: React.FC = () => {
         const dy = n1.y - n2.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        // Increased connection distance for "Web" feel
-        if (dist < 200) {
-          // Opacity based on distance and a "pulse" from time
-          const baseAlpha = (1 - dist / 200) * 0.3;
-          const pulse = (Math.sin(timeRef.current * 2 + n1.id) + 1) / 2; // 0 to 1
-          const alpha = baseAlpha * (0.5 + 0.5 * pulse); // Breathing connection
+        if (dist < maxDistance) {
+            // Calculate Mouse Proximity to the connection center
+            const midX = (n1.x + n2.x) / 2;
+            const midY = (n1.y + n2.y) / 2;
+            const mDx = mouseRef.current.x - midX;
+            const mDy = mouseRef.current.y - midY;
+            const mDist = Math.sqrt(mDx * mDx + mDy * mDy);
+            
+            let mouseFactor = 0;
+            if (mDist < mouseInfluenceRadius) {
+                mouseFactor = (mouseInfluenceRadius - mDist) / mouseInfluenceRadius;
+            }
 
-          ctx.strokeStyle = `rgba(185, 28, 28, ${alpha})`;
-          ctx.beginPath();
-          ctx.moveTo(n1.x, n1.y);
-          ctx.lineTo(n2.x, n2.y);
-          ctx.stroke();
+            // Opacity Calculation
+            // 1. Distance Fade (Quadratic for softer falloff)
+            const edgeFade = 1 - Math.pow(dist / maxDistance, 2); 
+
+            // 2. Time Pulse (Organic breathing)
+            const pulse = (Math.sin(timeRef.current * 3 + n1.id + n2.id) + 1) / 2;
+            
+            // 3. Combine: Base opacity + Mouse Boost + Pulse
+            // Base opacity is low (0.15)
+            // Mouse boost can add up to 0.5
+            // Pulse adds subtle variation
+            let alpha = (0.15 + (mouseFactor * 0.5)) * edgeFade;
+            alpha += (pulse * 0.05); 
+
+            // Clamp alpha
+            if (alpha > 0.8) alpha = 0.8;
+            if (alpha < 0.05) continue; // Skip very faint lines for performance
+
+            ctx.strokeStyle = `rgba(220, 38, 38, ${alpha})`;
+            // Mouse proximity also increases line width slightly
+            ctx.lineWidth = 1 + (mouseFactor * 1.5);
+            
+            ctx.beginPath();
+            ctx.moveTo(n1.x, n1.y);
+            ctx.lineTo(n2.x, n2.y);
+            ctx.stroke();
         }
       }
     }
@@ -137,7 +170,7 @@ const NeuralBackground: React.FC = () => {
     };
 
     const initNodes = (w: number, h: number) => {
-        const count = Math.floor((w * h) / 15000); // Dense but performant
+        const count = Math.floor((w * h) / 14000); // Dense but performant
         const newNodes: Node[] = [];
         for(let i=0; i<count; i++) {
             newNodes.push({
@@ -147,8 +180,11 @@ const NeuralBackground: React.FC = () => {
                 baseX: Math.random() * w,
                 baseY: Math.random() * h,
                 phase: Math.random() * Math.PI * 2,
-                speed: 0.5 + Math.random() * 0.5,
-                size: 1.5 + Math.random() * 2
+                phaseY: Math.random() * Math.PI * 2, // New phase Y
+                speed: 0.2 + Math.random() * 0.5, // slightly more variation
+                size: 1.5 + Math.random() * 2,
+                amplitudeX: 20 + Math.random() * 40, // New amplitude
+                amplitudeY: 20 + Math.random() * 40 // New amplitude
             });
         }
         nodes.current = newNodes;

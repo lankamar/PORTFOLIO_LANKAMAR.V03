@@ -25,65 +25,86 @@ const About: React.FC = () => {
   const renderHTML = (html: string) => ({ __html: html });
 
   return (
-    <section id="about" className="py-24 px-4 relative overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <img src="/dioramas/framework.png" alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/25"></div>
-      </div>
-      <div className="max-w-4xl mx-auto relative z-10">
+    <section id="about" className="py-24 px-4 relative z-10">
+      <div className="max-w-4xl mx-auto">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
+          className="space-y-16"
         >
-          {/* Title */}
-          <motion.h2
-            className="font-serif text-4xl md:text-5xl text-white mb-4 text-center drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]"
+          {/* Main Title */}
+          <motion.h2 
             variants={itemVariants}
+            className="font-serif text-4xl md:text-5xl text-text-primary text-center leading-tight"
           >
             {copy.about.title}
           </motion.h2>
 
-          {/* Subtitle */}
-          <motion.p
-            className="text-accent-hover text-xl mb-8 text-center font-mono tracking-wide drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
-            variants={itemVariants}
-          >
-            {copy.about.subtitle}
-          </motion.p>
-
-          {/* Intro */}
-          <motion.p
-            className="text-white text-lg leading-relaxed mb-12 text-center max-w-3xl mx-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
-            variants={itemVariants}
-          >
-            {copy.about.intro}
-          </motion.p>
-
-          {/* 4 Sections Grid */}
-          <div className="grid md:grid-cols-2 gap-6">
-            {copy.about.sections.map((section: any, idx: number) => (
-              <motion.div
+          {/* Intro Paragraphs */}
+          <motion.div variants={itemVariants} className="glass-card space-y-6">
+            {copy.about.intro.map((paragraph, idx) => (
+              <p 
                 key={idx}
-                className="glass-card hover:border-accent-hover transition-all duration-300"
-                variants={itemVariants}
-              >
-                <div className="flex items-start gap-4">
-                  <span className="text-4xl">{section.icon}</span>
-                  <div>
-                    <h3 className="font-serif text-2xl text-white mb-3">
-                      {section.title}
-                    </h3>
-                    <p
-                      className="text-text-secondary leading-relaxed"
-                      dangerouslySetInnerHTML={renderHTML(section.content)}
-                    />
-                  </div>
-                </div>
-              </motion.div>
+                className="text-text-primary text-lg leading-relaxed font-light"
+                dangerouslySetInnerHTML={renderHTML(paragraph)}
+              />
             ))}
-          </div>
+          </motion.div>
+
+          {/* Manifesto Section */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            <h3 className="font-serif text-3xl text-accent-base border-l-4 border-accent-base pl-4">
+              {copy.about.manifesto.title}
+            </h3>
+            <div className="text-text-secondary text-lg leading-relaxed whitespace-pre-line">
+                <p dangerouslySetInnerHTML={renderHTML(copy.about.manifesto.text.split('\n\n')[0])} />
+                <br />
+                <p dangerouslySetInnerHTML={renderHTML(copy.about.manifesto.text.split('\n\n')[1])} />
+            </div>
+            <ul className="space-y-4 ml-4">
+              {copy.about.manifesto.items.map((item, idx) => (
+                <li key={idx} className="flex gap-3 text-text-primary text-lg">
+                  <span className="text-accent-base shrink-0 mt-1">▹</span>
+                  <span dangerouslySetInnerHTML={renderHTML(item)} />
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* RAG Section */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            <h3 className="font-serif text-3xl text-accent-base border-l-4 border-accent-base pl-4">
+              {copy.about.rag.title}
+            </h3>
+            <div className="text-text-secondary text-lg leading-relaxed whitespace-pre-line">
+                 <p dangerouslySetInnerHTML={renderHTML(copy.about.rag.text)} />
+            </div>
+            <ul className="space-y-4 ml-4">
+              {copy.about.rag.items.map((item, idx) => (
+                <li key={idx} className="flex gap-3 text-text-primary text-lg">
+                  <span className="text-accent-base shrink-0 mt-1">▹</span>
+                  <span dangerouslySetInnerHTML={renderHTML(item)} />
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Purpose Section */}
+          <motion.div variants={itemVariants} className="glass-card border-l-4 border-l-accent-hover">
+            <h3 className="font-serif text-2xl text-text-primary mb-4">
+              {copy.about.purpose.title}
+            </h3>
+            <p 
+              className="text-text-secondary text-lg leading-relaxed mb-8"
+              dangerouslySetInnerHTML={renderHTML(copy.about.purpose.text)}
+            />
+            <p className="font-serif text-2xl md:text-3xl text-center text-text-primary italic">
+              "{copy.about.purpose.quote}"
+            </p>
+          </motion.div>
+
         </motion.div>
       </div>
     </section>
