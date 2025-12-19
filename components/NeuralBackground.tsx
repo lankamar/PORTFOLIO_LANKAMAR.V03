@@ -145,8 +145,8 @@ const NeuralBackground: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    // REMOVED: prefers-reduced-motion check
+    // La animación ahora se muestra SIEMPRE en todos los dispositivos
 
     const canvas = canvasRef.current;
     if (!canvas) return;
