@@ -12,6 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Construir proyecto
+        run: npm run build
+
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
